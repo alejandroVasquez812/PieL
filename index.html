@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Piel by kekivelez</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Piel</h1>
+        <h2>A programming language for Spanish speakers</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/kekivelez/PieL/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/kekivelez/PieL/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/kekivelez/PieL" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a id="piel" class="anchor" href="#piel" aria-hidden="true"><span class="octicon octicon-link"></span></a>PieL</h1>
+
+<p>A programming language for Spanish speakers</p>
+
+<h3>
+<a id="java" class="anchor" href="#java" aria-hidden="true"><span class="octicon octicon-link"></span></a>Java</h3>
+
+<p>For this project you will need to have the JDK installed and in your path. You can find the JDK <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">here</a></p>
+
+<p>To verify if java is installed and in your system path open a terminal and type</p>
+
+<div class="highlight highlight-source-shell"><pre>$ java -version</pre></div>
+
+<p>You should receive the version in the next line.</p>
+
+<h3>
+<a id="javacc" class="anchor" href="#javacc" aria-hidden="true"><span class="octicon octicon-link"></span></a>JavaCC</h3>
+
+<p>You will also need to install JavaCC. To download  visit the <a href="https://javacc.java.net/" title="JavaCC Home">JavaCC Homepage</a>.</p>
+
+<h3>
+<a id="building-piel" class="anchor" href="#building-piel" aria-hidden="true"><span class="octicon octicon-link"></span></a>Building PieL</h3>
+
+<ol>
+<li>Open Terminal on the folder where the .jj file is along with the javacc.jar file is.</li>
+<li>Run these commands</li>
+</ol>
+
+<div class="highlight highlight-source-shell"><pre>java -cp <span class="pl-s"><span class="pl-pds">"</span>path to javacc.jar<span class="pl-pds">"</span></span> javacc <span class="pl-s"><span class="pl-pds">"</span>path to PieL.jj<span class="pl-pds">"</span></span></pre></div>
+
+<div class="highlight highlight-source-shell"><pre>javac <span class="pl-k">*</span>.java</pre></div>
+
+<h3>
+<a id="instructions-to-run-the-language" class="anchor" href="#instructions-to-run-the-language" aria-hidden="true"><span class="octicon octicon-link"></span></a>Instructions to run the language:</h3>
+
+<ol>
+<li>Run a terminal inside the folder where the parser,lexer and intermidiate code reside.</li>
+</ol>
+
+<div class="highlight highlight-source-shell"><pre>java PieL</pre></div>
+
+<ol>
+<li>This will allow you to start writing code in the PieL Language.</li>
+</ol>
+
+<p>Example code to write (the words inside the quotations are to be replaced for information of your choice ex. ID would be the name of a variable you have created):</p>
+
+<p>a) Crea un "TYPE" llamado "ID" con valor ("STRING" OR "NUMBER" OR "ID").</p>
+
+<p>b) Crea un "STRUCT" de "TYPE" llamado "ID" y valores [ "MULTITERM" ].</p>
+
+<p>c) Si ("STRING" OR "NUMBER" OR "ID") es igual a ("STRING" OR "NUMBER" OR "ID") {"insert instructions here"}.</p>
+
+<p>d) Imprime "ID".</p>
+
+<p>e) Imprime arreglo o lista "ID".</p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
