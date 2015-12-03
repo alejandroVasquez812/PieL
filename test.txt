@@ -1,0 +1,6 @@
+Crea un numero llamado X con valor 10.
+X es igual a X mas 10.
+Crea un arreglo de numero llamado Y con valores [10,20,30].
+X es igual X mas el elemento 1 del arreglo Y.
+Imprime X.
+Termina.
