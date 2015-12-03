@@ -51,7 +51,7 @@ SKIP: {
 TOKEN :
 {
 	<OP: "es igual a"|"es menor que"|"es mayor que"|"es igual o menor que"|"es igual o mayor que"|"no es igual a">
-|	<ARITH: "por"|"entre"|" mas "|"menos"|"modulo">
+|	<ARITH: " por "|" entre "|" mas "|" menos "|" modulo ">
 |  < LCURLYBRACE: "{" >
 | < RCURLYBRACE: "}" >
 | < LSQUAREBRACKET: "[" >
@@ -353,7 +353,16 @@ while (!token.image.equals("}"))
 
 } ("}")?)?{} 
  
-| 	"Imprime "m=<ID>{System.out.println(mp.get(m.image));}
+| 	"Imprime "(m=<ID>|m=<NUMBER>|m=<STRING>)
+{
+if(m.kind==ID)
+{
+System.out.println(mp.get(m.image));
+}
+else{
+System.out.println(m.image);
+}
+}
 | 	"Imprime arreglo "m=<ID>{System.out.println(Arrays.asList(mp.get(m.image)));}
 |   "Imprime el elemento "m=<NUMBER>" del arreglo "k=<ID>{
 	ArrayList<Object> list = (ArrayList<Object>)(mp.get(k.image));

@@ -1,0 +1,2 @@
+Imprime X.X es igual a X mas 1.
+Termina.
