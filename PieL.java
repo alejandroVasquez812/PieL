@@ -5,24 +5,31 @@ import java.io.*;
 
 public class PieL implements PieLConstants {
 
+
+
     public static void main(String args[]) throws ParseException {
-    PieL parser = new PieL(System.in);
-    HashMap mp=  new HashMap();
+    try{
+
+        PieL parser = new PieL(System.in);
+
+
+        HashMap mp = new HashMap();
+
         boolean func = true;
-       try{
+
             while(func){
                func= parser.Input(mp);
             }
-       }
+
+
+  }
        catch (Throwable e)
        {
            System.out.println(e.getMessage());
        }
+}
 
-
-    }
-
-  static final public boolean Input(HashMap mp) throws ParseException {
+  final public boolean Input(HashMap mp) throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case 119:{
       jj_consume_token(119);
@@ -36,10 +43,11 @@ public class PieL implements PieLConstants {
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
         case ID:
         case 120:
-        case 125:
-        case 129:
-        case 130:
-        case 131:{
+        case 123:
+        case 127:
+        case 131:
+        case 132:
+        case 133:{
           ;
           break;
           }
@@ -55,7 +63,8 @@ public class PieL implements PieLConstants {
     throw new Error("Missing return statement in function");
   }
 
-  static final public void Statement(HashMap mp) throws ParseException {Token j=null,k=null,l=null,m=null,t=null, n=null,o=null;
+  final public void Statement(HashMap mp) throws ParseException {Token j=null,k=null,l=null,m=null,t=null, n=null,o=null;
+StringBuilder sb = new StringBuilder();
         Boolean check=null,persist=false;
     if (jj_2_2(2)) {
       jj_consume_token(120);
@@ -85,14 +94,121 @@ if(j.image.equals("numero")){mp.put(k.image,Double.parseDouble(l.image));}
         else if(j.image.equals("estrin")){mp.put(k.image,l.image);}
     } else {
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case 123:{
+        jj_consume_token(123);
+        switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case ID:{
+          j = jj_consume_token(ID);
+          break;
+          }
+        case NUMBER:{
+          j = jj_consume_token(NUMBER);
+          break;
+          }
+        default:
+          jj_la1[3] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
+        l = jj_consume_token(OP);
+        switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case NUMBER:{
+          m = jj_consume_token(NUMBER);
+          break;
+          }
+        case ID:{
+          m = jj_consume_token(ID);
+          break;
+          }
+        default:
+          jj_la1[4] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
+        jj_consume_token(124);
+token = getNextToken();
+while (!token.image.equals("}"))
+              {
+
+                                sb.append(token.image);
+                                 token = getNextToken();
+              }
+        switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case RCURLYBRACE:{
+          jj_consume_token(RCURLYBRACE);
+          break;
+          }
+        default:
+          jj_la1[5] = jj_gen;
+          ;
+        }
+try{
+
+                boolean verify=false;
+                Double a,b;
+                if(j.kind == ID){
+                        a=(Double)mp.get(j.image);
+                        }
+                else{a = Double.parseDouble(j.image);}
+
+                if(m.kind == ID){
+                        b=(Double)mp.get(m.image);
+                        }
+                else{b = Double.parseDouble(m.image);}
+
+                int nums = Double.compare(a,b);
+
+                if(l.image.equals("es igual a")){verify= nums==0;}
+                else if(l.image.equals("es mayor que")){verify= nums>0;}
+                else if(l.image.equals("es menor que")){verify= nums<0;}
+                else if(l.image.equals("es igual o mayor que")){verify= nums>=0;}
+                else if(l.image.equals("es igual o menor que")){verify=nums<=0;}
+                else if(l.image.equals("no es igual a")){verify=nums!=0;}
+                //System.out.println("Here and"+verify);
+                while(verify)
+                {
+                PrintWriter writer = new PrintWriter("printReader.txt", "UTF-8");
+                writer.println(sb.toString());
+                writer.println("Termina.");
+                writer.close();
+                PieL parse2 = new PieL(new FileInputStream("printReader.txt"));
+                boolean func2 = true;
+            while(func2){
+               func2= parse2.Input(mp);
+            }
+                        //System.out.println("Here and"+mp.get("X"));
+                        if(j.kind == ID){
+                        a=(Double)mp.get(j.image);
+                        }
+                else{a = Double.parseDouble(j.image);}
+
+                if(m.kind == ID){
+                        b=(Double)mp.get(m.image);
+                        }
+                else{b = Double.parseDouble(m.image);}
+
+                 nums = Double.compare(a,b);
+
+                if(l.image.equals("es igual a")){verify= nums==0;}
+                else if(l.image.equals("es mayor que")){verify= nums>0;}
+                else if(l.image.equals("es menor que")){verify= nums<0;}
+                else if(l.image.equals("es igual o mayor que")){verify= nums>=0;}
+                else if(l.image.equals("es igual o menor que")){verify=nums<=0;}
+                else if(l.image.equals("no es igual a")){verify=nums!=0;}
+
+                }
+        }
+        catch(Exception E){}
+        break;
+        }
       case 120:{
         jj_consume_token(120);
         k = jj_consume_token(STRUCT);
-        jj_consume_token(123);
+        jj_consume_token(125);
         t = jj_consume_token(TYPE);
         jj_consume_token(121);
         l = jj_consume_token(ID);
-        jj_consume_token(124);
+        jj_consume_token(126);
         j = jj_consume_token(MULTITERM);
         jj_consume_token(RSQUAREBRACKET);
 String[] lister = j.image.split(",");
@@ -116,10 +232,10 @@ String[] lister = j.image.split(",");
         }
         break;
         }
-      case 125:{
-        jj_consume_token(125);
+      case 127:{
+        jj_consume_token(127);
         check = Conds(mp);
-        jj_consume_token(126);
+        jj_consume_token(128);
 if(check){Input(mp); persist=true;}
                 else{
                         while (!token.image.equals("}"))
@@ -138,17 +254,17 @@ if(check){Input(mp); persist=true;}
         label_2:
         while (true) {
           switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-          case 127:{
+          case 129:{
             ;
             break;
             }
           default:
-            jj_la1[3] = jj_gen;
+            jj_la1[6] = jj_gen;
             break label_2;
           }
-          jj_consume_token(127);
+          jj_consume_token(129);
 if(!persist){check=Conds(mp);}else{check=false;}
-          jj_consume_token(126);
+          jj_consume_token(128);
 if(check){Input(mp);persist=true;}
                 else{
                         while (!token.image.equals("}"))
@@ -166,12 +282,12 @@ if(check){Input(mp);persist=true;}
           break;
           }
         default:
-          jj_la1[4] = jj_gen;
+          jj_la1[7] = jj_gen;
           ;
         }
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-        case 128:{
-          jj_consume_token(128);
+        case 130:{
+          jj_consume_token(130);
 if(!persist)
         {Input(mp);}
         else{
@@ -189,34 +305,34 @@ if(!persist)
             break;
             }
           default:
-            jj_la1[5] = jj_gen;
+            jj_la1[8] = jj_gen;
             ;
           }
           break;
           }
         default:
-          jj_la1[6] = jj_gen;
+          jj_la1[9] = jj_gen;
           ;
         }
 
         break;
         }
-      case 129:{
-        jj_consume_token(129);
+      case 131:{
+        jj_consume_token(131);
         m = jj_consume_token(ID);
 System.out.println(mp.get(m.image));
         break;
         }
-      case 130:{
-        jj_consume_token(130);
+      case 132:{
+        jj_consume_token(132);
         m = jj_consume_token(ID);
 System.out.println(Arrays.asList(mp.get(m.image)));
         break;
         }
-      case 131:{
-        jj_consume_token(131);
+      case 133:{
+        jj_consume_token(133);
         m = jj_consume_token(NUMBER);
-        jj_consume_token(132);
+        jj_consume_token(134);
         k = jj_consume_token(ID);
 ArrayList<Object> list = (ArrayList<Object>)(mp.get(k.image));
 
@@ -225,7 +341,7 @@ ArrayList<Object> list = (ArrayList<Object>)(mp.get(k.image));
         }
       case ID:{
         j = jj_consume_token(ID);
-        jj_consume_token(133);
+        jj_consume_token(135);
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
         case ID:{
           k = jj_consume_token(ID);
@@ -239,15 +355,15 @@ ArrayList<Object> list = (ArrayList<Object>)(mp.get(k.image));
           k = jj_consume_token(STRING);
           break;
           }
-        case 134:{
-          jj_consume_token(134);
+        case 136:{
+          jj_consume_token(136);
           k = jj_consume_token(NUMBER);
-          jj_consume_token(132);
+          jj_consume_token(134);
           t = jj_consume_token(ID);
           break;
           }
         default:
-          jj_la1[7] = jj_gen;
+          jj_la1[10] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -263,22 +379,22 @@ ArrayList<Object> list = (ArrayList<Object>)(mp.get(k.image));
             m = jj_consume_token(NUMBER);
             break;
             }
-          case 134:{
-            jj_consume_token(134);
+          case 136:{
+            jj_consume_token(136);
             n = jj_consume_token(NUMBER);
-            jj_consume_token(132);
+            jj_consume_token(134);
             o = jj_consume_token(ID);
             break;
             }
           default:
-            jj_la1[8] = jj_gen;
+            jj_la1[11] = jj_gen;
             jj_consume_token(-1);
             throw new ParseException();
           }
           break;
           }
         default:
-          jj_la1[9] = jj_gen;
+          jj_la1[12] = jj_gen;
           ;
         }
 if(l==null&&t==null)
@@ -297,18 +413,18 @@ if(l==null&&t==null)
                 }
                 else if(o==null&&t==null)
                 {
-
+                        //System.out.println("Here and"+mp.get("X"));
                         Double a=null,b=null;
                         if(k.kind ==ID){a= (Double)mp.get(k.image);}
                         else if(k.kind ==NUMBER){a=Double.parseDouble(k.image);}
                         if(m.kind ==ID){b= (Double)mp.get(m.image);}
                         else if(m.kind ==NUMBER){b=Double.parseDouble(m.image);}
-
-                        if(l.image.equals("por")){mp.put(j.image,a*b);}
-                        else if (l.image.equals("entre")){mp.put(j.image,a/b);}
-                        else if (l.image.equals("mas")){mp.put(j.image,a+b);}
-                        else if (l.image.equals("menos")){mp.put(j.image,a-b);}
-                        else if (l.image.equals("modulo")){mp.put(j.image,a%b);}
+                        //System.out.println(a+" and "+b);
+                        if(l.image.contains("por")){mp.put(j.image,a*b);}
+                        else if (l.image.contains("entre")){mp.put(j.image,a/b);}
+                        else if (l.image.contains("mas")){mp.put(j.image,a+b);}
+                        else if (l.image.contains("menos")){mp.put(j.image,a-b);}
+                        else if (l.image.contains("modulo")){mp.put(j.image,a%b);}
 
 
                 }
@@ -357,14 +473,14 @@ if(l==null&&t==null)
         break;
         }
       default:
-        jj_la1[10] = jj_gen;
+        jj_la1[13] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
     }
   }
 
-  static final public boolean Conds(HashMap mp) throws ParseException {Token i,j,k;
+  final public boolean Conds(HashMap mp) throws ParseException {Token i,j,k;
 Double a=null,b=null;
 String c=null,d=null;
 Boolean check=null;
@@ -382,7 +498,7 @@ Boolean check=null;
       break;
       }
     default:
-      jj_la1[11] = jj_gen;
+      jj_la1[14] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -401,7 +517,7 @@ Boolean check=null;
       break;
       }
     default:
-      jj_la1[12] = jj_gen;
+      jj_la1[15] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -412,7 +528,7 @@ Boolean check=null;
       } else {
         break label_3;
       }
-      jj_consume_token(135);
+      jj_consume_token(137);
       check = Conds(mp);
     }
 if(i.kind==ID&&!mp.get(i.image).toString().contains("\u005c"")){a=(Double)mp.get(i.image);}
@@ -459,7 +575,7 @@ if(i.kind==ID&&!mp.get(i.image).toString().contains("\u005c"")){a=(Double)mp.get
     throw new Error("Missing return statement in function");
   }
 
-  static private boolean jj_2_1(int xla)
+  private boolean jj_2_1(int xla)
  {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_1(); }
@@ -467,7 +583,7 @@ if(i.kind==ID&&!mp.get(i.image).toString().contains("\u005c"")){a=(Double)mp.get
     finally { jj_save(0, xla); }
   }
 
-  static private boolean jj_2_2(int xla)
+  private boolean jj_2_2(int xla)
  {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_2(); }
@@ -475,7 +591,7 @@ if(i.kind==ID&&!mp.get(i.image).toString().contains("\u005c"")){a=(Double)mp.get
     finally { jj_save(1, xla); }
   }
 
-  static private boolean jj_2_3(int xla)
+  private boolean jj_2_3(int xla)
  {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_3(); }
@@ -483,7 +599,7 @@ if(i.kind==ID&&!mp.get(i.image).toString().contains("\u005c"")){a=(Double)mp.get
     finally { jj_save(2, xla); }
   }
 
-  static private boolean jj_3R_4()
+  private boolean jj_3R_4()
  {
     Token xsp;
     xsp = jj_scanpos;
@@ -498,39 +614,38 @@ if(i.kind==ID&&!mp.get(i.image).toString().contains("\u005c"")){a=(Double)mp.get
     return false;
   }
 
-  static private boolean jj_3_1()
- {
-    if (jj_scan_token(RCURLYBRACE)) return true;
-    return false;
-  }
-
-  static private boolean jj_3_3()
- {
-    if (jj_scan_token(135)) return true;
-    if (jj_3R_4()) return true;
-    return false;
-  }
-
-  static private boolean jj_3_2()
+  private boolean jj_3_2()
  {
     if (jj_scan_token(120)) return true;
     if (jj_scan_token(TYPE)) return true;
     return false;
   }
 
-  static private boolean jj_initialized_once = false;
+  private boolean jj_3_3()
+ {
+    if (jj_scan_token(137)) return true;
+    if (jj_3R_4()) return true;
+    return false;
+  }
+
+  private boolean jj_3_1()
+ {
+    if (jj_scan_token(RCURLYBRACE)) return true;
+    return false;
+  }
+
   /** Generated Token Manager. */
-  static public PieLTokenManager token_source;
-  static SimpleCharStream jj_input_stream;
+  public PieLTokenManager token_source;
+  SimpleCharStream jj_input_stream;
   /** Current token. */
-  static public Token token;
+  public Token token;
   /** Next token. */
-  static public Token jj_nt;
-  static private int jj_ntk;
-  static private Token jj_scanpos, jj_lastpos;
-  static private int jj_la;
-  static private int jj_gen;
-  static final private int[] jj_la1 = new int[13];
+  public Token jj_nt;
+  private int jj_ntk;
+  private Token jj_scanpos, jj_lastpos;
+  private int jj_la;
+  private int jj_gen;
+  final private int[] jj_la1 = new int[16];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static private int[] jj_la1_2;
@@ -544,23 +659,23 @@ if(i.kind==ID&&!mp.get(i.image).toString().contains("\u005c"")){a=(Double)mp.get
       jj_la1_init_4();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x0,0x0,0x0,0x0,0x200,0x200,0x0,0x0,0x0,0x80,0x0,0x0,0x0,};
+      jj_la1_0 = new int[] {0x0,0x0,0x0,0x0,0x0,0x200,0x0,0x200,0x200,0x0,0x0,0x0,0x80,0x0,0x0,0x0,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_1 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
    private static void jj_la1_init_2() {
-      jj_la1_2 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_2 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
    private static void jj_la1_init_3() {
-      jj_la1_3 = new int[] {0x21010000,0x800000,0xd0000,0x80000000,0x0,0x0,0x0,0xd0000,0x90000,0x0,0x21010000,0xd0000,0xd0000,};
+      jj_la1_3 = new int[] {0x89010000,0x800000,0xd0000,0x90000,0x90000,0x0,0x0,0x0,0x0,0x0,0xd0000,0x90000,0x0,0x89010000,0xd0000,0xd0000,};
    }
    private static void jj_la1_init_4() {
-      jj_la1_4 = new int[] {0xe,0x0,0x0,0x0,0x0,0x0,0x1,0x40,0x40,0x0,0xe,0x0,0x0,};
+      jj_la1_4 = new int[] {0x38,0x0,0x0,0x0,0x0,0x0,0x2,0x0,0x0,0x4,0x100,0x100,0x0,0x38,0x0,0x0,};
    }
-  static final private JJCalls[] jj_2_rtns = new JJCalls[3];
-  static private boolean jj_rescan = false;
-  static private int jj_gc = 0;
+  final private JJCalls[] jj_2_rtns = new JJCalls[3];
+  private boolean jj_rescan = false;
+  private int jj_gc = 0;
 
   /** Constructor with InputStream. */
   public PieL(java.io.InputStream stream) {
@@ -568,80 +683,59 @@ if(i.kind==ID&&!mp.get(i.image).toString().contains("\u005c"")){a=(Double)mp.get
   }
   /** Constructor with InputStream and supplied encoding */
   public PieL(java.io.InputStream stream, String encoding) {
-    if (jj_initialized_once) {
-      System.out.println("ERROR: Second call to constructor of static parser.  ");
-      System.out.println("       You must either use ReInit() or set the JavaCC option STATIC to false");
-      System.out.println("       during parser generation.");
-      throw new Error();
-    }
-    jj_initialized_once = true;
     try { jj_input_stream = new SimpleCharStream(stream, encoding, 1, 1); } catch(java.io.UnsupportedEncodingException e) { throw new RuntimeException(e); }
     token_source = new PieLTokenManager(jj_input_stream);
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 13; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 16; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
   /** Reinitialise. */
-  static public void ReInit(java.io.InputStream stream) {
+  public void ReInit(java.io.InputStream stream) {
      ReInit(stream, null);
   }
   /** Reinitialise. */
-  static public void ReInit(java.io.InputStream stream, String encoding) {
+  public void ReInit(java.io.InputStream stream, String encoding) {
     try { jj_input_stream.ReInit(stream, encoding, 1, 1); } catch(java.io.UnsupportedEncodingException e) { throw new RuntimeException(e); }
     token_source.ReInit(jj_input_stream);
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 13; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 16; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
   /** Constructor. */
   public PieL(java.io.Reader stream) {
-    if (jj_initialized_once) {
-      System.out.println("ERROR: Second call to constructor of static parser. ");
-      System.out.println("       You must either use ReInit() or set the JavaCC option STATIC to false");
-      System.out.println("       during parser generation.");
-      throw new Error();
-    }
-    jj_initialized_once = true;
     jj_input_stream = new SimpleCharStream(stream, 1, 1);
     token_source = new PieLTokenManager(jj_input_stream);
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 13; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 16; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
   /** Reinitialise. */
-  static public void ReInit(java.io.Reader stream) {
+  public void ReInit(java.io.Reader stream) {
     jj_input_stream.ReInit(stream, 1, 1);
     token_source.ReInit(jj_input_stream);
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 13; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 16; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
   /** Constructor with generated Token Manager. */
   public PieL(PieLTokenManager tm) {
-    if (jj_initialized_once) {
-      System.out.println("ERROR: Second call to constructor of static parser. ");
-      System.out.println("       You must either use ReInit() or set the JavaCC option STATIC to false");
-      System.out.println("       during parser generation.");
-      throw new Error();
-    }
-    jj_initialized_once = true;
     token_source = tm;
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 13; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 16; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -651,11 +745,11 @@ if(i.kind==ID&&!mp.get(i.image).toString().contains("\u005c"")){a=(Double)mp.get
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 13; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 16; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
-  static private Token jj_consume_token(int kind) throws ParseException {
+  private Token jj_consume_token(int kind) throws ParseException {
     Token oldToken;
     if ((oldToken = token).next != null) token = token.next;
     else token = token.next = token_source.getNextToken();
@@ -681,8 +775,8 @@ if(i.kind==ID&&!mp.get(i.image).toString().contains("\u005c"")){a=(Double)mp.get
 
   @SuppressWarnings("serial")
   static private final class LookaheadSuccess extends java.lang.Error { }
-  static final private LookaheadSuccess jj_ls = new LookaheadSuccess();
-  static private boolean jj_scan_token(int kind) {
+  final private LookaheadSuccess jj_ls = new LookaheadSuccess();
+  private boolean jj_scan_token(int kind) {
     if (jj_scanpos == jj_lastpos) {
       jj_la--;
       if (jj_scanpos.next == null) {
@@ -705,7 +799,7 @@ if(i.kind==ID&&!mp.get(i.image).toString().contains("\u005c"")){a=(Double)mp.get
 
 
 /** Get the next Token. */
-  static final public Token getNextToken() {
+  final public Token getNextToken() {
     if (token.next != null) token = token.next;
     else token = token.next = token_source.getNextToken();
     jj_ntk = -1;
@@ -714,7 +808,7 @@ if(i.kind==ID&&!mp.get(i.image).toString().contains("\u005c"")){a=(Double)mp.get
   }
 
 /** Get the specific Token. */
-  static final public Token getToken(int index) {
+  final public Token getToken(int index) {
     Token t = token;
     for (int i = 0; i < index; i++) {
       if (t.next != null) t = t.next;
@@ -723,20 +817,20 @@ if(i.kind==ID&&!mp.get(i.image).toString().contains("\u005c"")){a=(Double)mp.get
     return t;
   }
 
-  static private int jj_ntk_f() {
+  private int jj_ntk_f() {
     if ((jj_nt=token.next) == null)
       return (jj_ntk = (token.next=token_source.getNextToken()).kind);
     else
       return (jj_ntk = jj_nt.kind);
   }
 
-  static private java.util.List<int[]> jj_expentries = new java.util.ArrayList<int[]>();
-  static private int[] jj_expentry;
-  static private int jj_kind = -1;
-  static private int[] jj_lasttokens = new int[100];
-  static private int jj_endpos;
+  private java.util.List<int[]> jj_expentries = new java.util.ArrayList<int[]>();
+  private int[] jj_expentry;
+  private int jj_kind = -1;
+  private int[] jj_lasttokens = new int[100];
+  private int jj_endpos;
 
-  static private void jj_add_error_token(int kind, int pos) {
+  private void jj_add_error_token(int kind, int pos) {
     if (pos >= 100) return;
     if (pos == jj_endpos + 1) {
       jj_lasttokens[jj_endpos++] = kind;
@@ -762,14 +856,14 @@ if(i.kind==ID&&!mp.get(i.image).toString().contains("\u005c"")){a=(Double)mp.get
   }
 
   /** Generate ParseException. */
-  static public ParseException generateParseException() {
+  public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[136];
+    boolean[] la1tokens = new boolean[138];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 13; i++) {
+    for (int i = 0; i < 16; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
@@ -790,7 +884,7 @@ if(i.kind==ID&&!mp.get(i.image).toString().contains("\u005c"")){a=(Double)mp.get
         }
       }
     }
-    for (int i = 0; i < 136; i++) {
+    for (int i = 0; i < 138; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;
@@ -808,14 +902,14 @@ if(i.kind==ID&&!mp.get(i.image).toString().contains("\u005c"")){a=(Double)mp.get
   }
 
   /** Enable tracing. */
-  static final public void enable_tracing() {
+  final public void enable_tracing() {
   }
 
   /** Disable tracing. */
-  static final public void disable_tracing() {
+  final public void disable_tracing() {
   }
 
-  static private void jj_rescan_token() {
+  private void jj_rescan_token() {
     jj_rescan = true;
     for (int i = 0; i < 3; i++) {
     try {
@@ -836,7 +930,7 @@ if(i.kind==ID&&!mp.get(i.image).toString().contains("\u005c"")){a=(Double)mp.get
     jj_rescan = false;
   }
 
-  static private void jj_save(int index, int xla) {
+  private void jj_save(int index, int xla) {
     JJCalls p = jj_2_rtns[index];
     while (p.gen > jj_gen) {
       if (p.next == null) { p = p.next = new JJCalls(); break; }

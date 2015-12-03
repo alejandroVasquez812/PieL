@@ -1,5 +1,7 @@
 options
 {
+	IGNORE_CASE = true;
+	STATIC = false;
 }
 
 PARSER_BEGIN(PieL)
@@ -9,23 +11,30 @@ import java.io.*;
 
 public class PieL
 {
+	
+
     
     public static void main(String args[]) throws ParseException {
-    PieL parser = new PieL(System.in);
-    HashMap mp=  new HashMap();
+    try{
+	
+	PieL parser = new PieL(System.in);
+	
+	
+	HashMap mp = new HashMap();	
+	
 	boolean func = true;
-       try{
+      
             while(func){
                func= parser.Input(mp);
             }
-       }
+       
+       
+  }
        catch (Throwable e)
        {
            System.out.println(e.getMessage());
        }
-       
-   
-    }
+}
 }
 
 
@@ -42,7 +51,7 @@ SKIP: {
 TOKEN :
 {
 	<OP: "es igual a"|"es menor que"|"es mayor que"|"es igual o menor que"|"es igual o mayor que"|"no es igual a">
-|	<ARITH: "por"|"entre"|"mas"|"menos"|"modulo">
+|	<ARITH: "por"|"entre"|" mas "|"menos"|"modulo">
 |  < LCURLYBRACE: "{" >
 | < RCURLYBRACE: "}" >
 | < LSQUAREBRACKET: "[" >
@@ -192,8 +201,8 @@ boolean Input(HashMap mp):
 
 void Statement(HashMap mp):
 {Token j=null,k=null,l=null,m=null,t=null, n=null,o=null;
+StringBuilder sb = new StringBuilder();
 	Boolean check=null,persist=false;
-	
 }
 { LOOKAHEAD(2)
     "Crea un " j=<TYPE> " llamado "k=<ID> " con valor " (l=<STRING> |l=<NUMBER> |l=<ID>) 
@@ -202,7 +211,79 @@ void Statement(HashMap mp):
         else if(j.image.equals("estrin")){mp.put(k.image,l.image);}
        
     }
+	
+| "Mientras "(j=<ID>|j=<NUMBER>)l=<OP>(m=<NUMBER>|m=<ID>) " repite {"
+{
+token = getNextToken();
+while (!token.image.equals("}"))
+              {
+               
+				sb.append(token.image);
+				 token = getNextToken();
+              }
 
+
+} ("}")?
+{
+	
+	try{
+		
+		boolean verify=false;
+		Double a,b;		
+		if(j.kind == ID){
+			a=(Double)mp.get(j.image);
+			}
+		else{a = Double.parseDouble(j.image);}
+				
+		if(m.kind == ID){
+			b=(Double)mp.get(m.image);
+			}
+		else{b = Double.parseDouble(m.image);}
+		
+		int nums = Double.compare(a,b);
+		
+		if(l.image.equals("es igual a")){verify= nums==0;}
+		else if(l.image.equals("es mayor que")){verify= nums>0;}
+		else if(l.image.equals("es menor que")){verify= nums<0;}
+		else if(l.image.equals("es igual o mayor que")){verify= nums>=0;}
+		else if(l.image.equals("es igual o menor que")){verify=nums<=0;}
+		else if(l.image.equals("no es igual a")){verify=nums!=0;}
+		//System.out.println("Here and"+verify);
+		while(verify)
+		{
+		PrintWriter writer = new PrintWriter("printReader.txt", "UTF-8");
+		writer.println(sb.toString());
+		writer.println("Termina.");
+		writer.close();
+		PieL parse2 = new PieL(new FileInputStream("printReader.txt"));
+		boolean func2 = true;
+            while(func2){
+               func2= parse2.Input(mp);
+            }
+			//System.out.println("Here and"+mp.get("X"));
+			if(j.kind == ID){
+			a=(Double)mp.get(j.image);
+			}
+		else{a = Double.parseDouble(j.image);}
+				
+		if(m.kind == ID){
+			b=(Double)mp.get(m.image);
+			}
+		else{b = Double.parseDouble(m.image);}
+		
+		 nums = Double.compare(a,b);
+		
+		if(l.image.equals("es igual a")){verify= nums==0;}
+		else if(l.image.equals("es mayor que")){verify= nums>0;}
+		else if(l.image.equals("es menor que")){verify= nums<0;}
+		else if(l.image.equals("es igual o mayor que")){verify= nums>=0;}
+		else if(l.image.equals("es igual o menor que")){verify=nums<=0;}
+		else if(l.image.equals("no es igual a")){verify=nums!=0;}
+			
+		}
+	}
+	catch(Exception E){}
+}
 |	"Crea un " k=<STRUCT>" de " t=<TYPE> " llamado "l=<ID>" con valores [" j=<MULTITERM> "]"
     {
         String[] lister = j.image.split(",");
@@ -300,18 +381,18 @@ void Statement(HashMap mp):
 		}
 		else if(o==null&&t==null)
 		{
-			
+			//System.out.println("Here and"+mp.get("X"));
 			Double a=null,b=null;
 			if(k.kind ==ID){a= (Double)mp.get(k.image);}
 			else if(k.kind ==NUMBER){a=Double.parseDouble(k.image);}
 			if(m.kind ==ID){b= (Double)mp.get(m.image);}
 			else if(m.kind ==NUMBER){b=Double.parseDouble(m.image);}
-			
-			if(l.image.equals("por")){mp.put(j.image,a*b);}
-			else if (l.image.equals("entre")){mp.put(j.image,a/b);}
-			else if (l.image.equals("mas")){mp.put(j.image,a+b);}
-			else if (l.image.equals("menos")){mp.put(j.image,a-b);}
-			else if (l.image.equals("modulo")){mp.put(j.image,a%b);}
+			//System.out.println(a+" and "+b);
+			if(l.image.contains("por")){mp.put(j.image,a*b);}
+			else if (l.image.contains("entre")){mp.put(j.image,a/b);}
+			else if (l.image.contains("mas")){mp.put(j.image,a+b);}
+			else if (l.image.contains("menos")){mp.put(j.image,a-b);}
+			else if (l.image.contains("modulo")){mp.put(j.image,a%b);}
 			
 		
 		}
@@ -361,6 +442,9 @@ void Statement(HashMap mp):
 	}
     
 }
+
+
+
 
 
 boolean Conds(HashMap mp):

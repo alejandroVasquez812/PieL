@@ -363,6 +363,8 @@ public interface PieLConstants {
     "\"Crea un \"",
     "\" llamado \"",
     "\" con valor \"",
+    "\"Mientras \"",
+    "\" repite {\"",
     "\" de \"",
     "\" con valores [\"",
     "\"Si \"",
