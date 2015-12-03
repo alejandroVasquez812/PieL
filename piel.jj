@@ -193,6 +193,7 @@ boolean Input(HashMap mp):
 void Statement(HashMap mp):
 {Token j=null,k=null,l=null,m=null,t=null, n=null,o=null;
 	Boolean check=null,persist=false;
+	
 }
 { LOOKAHEAD(2)
     "Crea un " j=<TYPE> " llamado "k=<ID> " con valor " (l=<STRING> |l=<NUMBER> |l=<ID>) 
