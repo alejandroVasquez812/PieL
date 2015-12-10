@@ -1,9 +1,9 @@
-Crea un numero llamado X con valor 1000000007.
+Crea un numero llamado X con valor 1.
+Crea un numero llamado constante con valor 3.
 Crea un numero llamado Y con valor 0.
+Mientras Y es menor que 10 repite {
 Imprime X.
-Mientras Y es menor que 7 repite {
-Imprime X.
-X es igual a X por X.
+X es igual a X por constante.
 Y es igual a Y mas 1.
 }.
 Termina.
