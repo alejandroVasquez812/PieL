@@ -1,0 +1,9 @@
+Crea un numero llamado X con valor 1000000007.
+Crea un numero llamado Y con valor 0.
+Imprime X.
+Mientras Y es menor que 7 repite {
+Imprime X.
+X es igual a X por X.
+Y es igual a Y mas 1.
+}.
+Termina.

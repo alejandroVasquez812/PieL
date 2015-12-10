@@ -375,9 +375,8 @@ public interface PieLConstants {
     "\"Imprime arreglo \"",
     "\"Imprime el elemento \"",
     "\" del arreglo \"",
-    "\" es igual a \"",
     "\"el elemento \"",
-    "\" y \"",
+    "\" y tambien\"",
   };
 
 }

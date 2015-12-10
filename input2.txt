@@ -1,0 +1,41 @@
+Crea un numero llamado X con valor 10.
+Crea un numero llamado Z con valor 20.
+
+Si X es igual a Z es cierto {
+
+	Imprime "Es cierto".
+
+} si no es cierto {
+
+	Imprime "No es cierto".
+
+}.
+
+X es igual a X mas 10.
+
+Si X es igual a Z es cierto {
+
+	Imprime "Es cierto".
+
+} si no es cierto {
+
+	Imprime "No es cierto".
+
+}.
+
+
+
+Si 7 es igual a 7 y tambien 8 es igual a 8 es cierto {
+
+	Si "hola" no es igual a "adios" es cierto {
+	
+		Imprime "Exito!".
+	
+	}.	
+
+}.
+
+
+
+
+Termina.

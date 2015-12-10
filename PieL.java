@@ -10,16 +10,31 @@ public class PieL implements PieLConstants {
     public static void main(String args[]) throws ParseException {
     try{
 
-        PieL parser = new PieL(System.in);
+        PieL parser;
 
 
         HashMap mp = new HashMap();
 
         boolean func = true;
+        if(args.length == 0){
+
+        parser = new PieL(System.in);
 
             while(func){
                func= parser.Input(mp);
             }
+      }
+      else {
+
+
+          parser = new PieL(new java.io.FileInputStream(args[0]));
+
+            while(func){
+               func= parser.Input(mp);
+            }
+          }
+
+
 
 
   }
@@ -158,12 +173,12 @@ try{
 
                 int nums = Double.compare(a,b);
 
-                if(l.image.equals("es igual a")){verify= nums==0;}
-                else if(l.image.equals("es mayor que")){verify= nums>0;}
-                else if(l.image.equals("es menor que")){verify= nums<0;}
-                else if(l.image.equals("es igual o mayor que")){verify= nums>=0;}
-                else if(l.image.equals("es igual o menor que")){verify=nums<=0;}
-                else if(l.image.equals("no es igual a")){verify=nums!=0;}
+                if(l.image.equals(" es igual a ")){verify= nums==0;}
+                else if(l.image.equals(" es mayor que ")){verify= nums>0;}
+                else if(l.image.equals(" es menor que ")){verify= nums<0;}
+                else if(l.image.equals(" es igual o mayor que ")){verify= nums>=0;}
+                else if(l.image.equals(" es igual o menor que ")){verify=nums<=0;}
+                else if(l.image.equals(" no es igual a ")){verify=nums!=0;}
                 //System.out.println("Here and"+verify);
                 while(verify)
                 {
@@ -189,12 +204,12 @@ try{
 
                  nums = Double.compare(a,b);
 
-                if(l.image.equals("es igual a")){verify= nums==0;}
-                else if(l.image.equals("es mayor que")){verify= nums>0;}
-                else if(l.image.equals("es menor que")){verify= nums<0;}
-                else if(l.image.equals("es igual o mayor que")){verify= nums>=0;}
-                else if(l.image.equals("es igual o menor que")){verify=nums<=0;}
-                else if(l.image.equals("no es igual a")){verify=nums!=0;}
+                if(l.image.equals(" es igual a ")){verify= nums==0;}
+                else if(l.image.equals(" es mayor que ")){verify= nums>0;}
+                else if(l.image.equals(" es menor que ")){verify= nums<0;}
+                else if(l.image.equals(" es igual o mayor que ")){verify= nums>=0;}
+                else if(l.image.equals(" es igual o menor que ")){verify=nums<=0;}
+                else if(l.image.equals(" no es igual a ")){verify=nums!=0;}
 
                 }
         }
@@ -319,8 +334,31 @@ if(!persist)
         }
       case 131:{
         jj_consume_token(131);
-        m = jj_consume_token(ID);
+        switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case ID:{
+          m = jj_consume_token(ID);
+          break;
+          }
+        case NUMBER:{
+          m = jj_consume_token(NUMBER);
+          break;
+          }
+        case STRING:{
+          m = jj_consume_token(STRING);
+          break;
+          }
+        default:
+          jj_la1[10] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
+if(m.kind==ID)
+{
 System.out.println(mp.get(m.image));
+}
+else{
+System.out.println(m.image);
+}
         break;
         }
       case 132:{
@@ -341,7 +379,7 @@ ArrayList<Object> list = (ArrayList<Object>)(mp.get(k.image));
         }
       case ID:{
         j = jj_consume_token(ID);
-        jj_consume_token(135);
+        jj_consume_token(OP);
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
         case ID:{
           k = jj_consume_token(ID);
@@ -355,15 +393,15 @@ ArrayList<Object> list = (ArrayList<Object>)(mp.get(k.image));
           k = jj_consume_token(STRING);
           break;
           }
-        case 136:{
-          jj_consume_token(136);
+        case 135:{
+          jj_consume_token(135);
           k = jj_consume_token(NUMBER);
           jj_consume_token(134);
           t = jj_consume_token(ID);
           break;
           }
         default:
-          jj_la1[10] = jj_gen;
+          jj_la1[11] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -379,22 +417,22 @@ ArrayList<Object> list = (ArrayList<Object>)(mp.get(k.image));
             m = jj_consume_token(NUMBER);
             break;
             }
-          case 136:{
-            jj_consume_token(136);
+          case 135:{
+            jj_consume_token(135);
             n = jj_consume_token(NUMBER);
             jj_consume_token(134);
             o = jj_consume_token(ID);
             break;
             }
           default:
-            jj_la1[11] = jj_gen;
+            jj_la1[12] = jj_gen;
             jj_consume_token(-1);
             throw new ParseException();
           }
           break;
           }
         default:
-          jj_la1[12] = jj_gen;
+          jj_la1[13] = jj_gen;
           ;
         }
 if(l==null&&t==null)
@@ -473,7 +511,7 @@ if(l==null&&t==null)
         break;
         }
       default:
-        jj_la1[13] = jj_gen;
+        jj_la1[14] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -498,7 +536,7 @@ Boolean check=null;
       break;
       }
     default:
-      jj_la1[14] = jj_gen;
+      jj_la1[15] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -517,7 +555,7 @@ Boolean check=null;
       break;
       }
     default:
-      jj_la1[15] = jj_gen;
+      jj_la1[16] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -528,7 +566,7 @@ Boolean check=null;
       } else {
         break label_3;
       }
-      jj_consume_token(137);
+      jj_consume_token(136);
       check = Conds(mp);
     }
 if(i.kind==ID&&!mp.get(i.image).toString().contains("\u005c"")){a=(Double)mp.get(i.image);}
@@ -543,31 +581,32 @@ if(i.kind==ID&&!mp.get(i.image).toString().contains("\u005c"")){a=(Double)mp.get
                 if(a!=null&&b!=null&&check!=null){
                         int num = Double.compare(a,b);
 
-                if(j.image.equals("es igual a")){{if ("" != null) return num==0&&check;}}
-                else if(j.image.equals("es mayor que")){{if ("" != null) return num>0&&check;}}
-                else if(j.image.equals("es menor que")){{if ("" != null) return num<0&&check;}}
-                else if(j.image.equals("es igual o mayor que")){{if ("" != null) return num>=0&&check;}}
-                else if(j.image.equals("es igual o menor que")){{if ("" != null) return num<=0&&check;}}
-                else if(j.image.equals("no es igual a")){{if ("" != null) return num!=0&&check;}}
+                if(j.image.equals(" es igual a ")){{if ("" != null) return num==0&&check;}}
+                else if(j.image.equals(" es mayor que ")){{if ("" != null) return num>0&&check;}}
+                else if(j.image.equals(" es menor que ")){{if ("" != null) return num<0&&check;}}
+                else if(j.image.equals(" es igual o mayor que ")){{if ("" != null) return num>=0&&check;}}
+                else if(j.image.equals(" es igual o menor que ")){{if ("" != null) return num<=0&&check;}}
+                else if(j.image.equals(" no es igual a ")){{if ("" != null) return num!=0&&check;}}
                 }
                 else if(check!=null){
 
-                if(j.image.equals("es igual a")){{if ("" != null) return c.equals(d)&&check;}}
-
+                if(j.image.equals(" es igual a ")){{if ("" != null) return c.equals(d)&&check;}}
+                else if(j.image.equals(" no es igual a ")){{if ("" != null) return !c.equals(d)&&check;}}
                 }
                 else if(a!=null&&b!=null){
                         int num = Double.compare(a,b);
 
-                if(j.image.equals("es igual a")){{if ("" != null) return num==0;}}
-                else if(j.image.equals("es mayor que")){{if ("" != null) return num>0;}}
-                else if(j.image.equals("es menor que")){{if ("" != null) return num<0;}}
-                else if(j.image.equals("es igual o mayor que")){{if ("" != null) return num>=0;}}
-                else if(j.image.equals("es igual o menor que")){{if ("" != null) return num<=0;}}
-                else if(j.image.equals("no es igual a")){{if ("" != null) return num!=0;}}
+                if(j.image.equals(" es igual a ")){{if ("" != null) return num==0;}}
+                else if(j.image.equals(" es mayor que ")){{if ("" != null) return num>0;}}
+                else if(j.image.equals(" es menor que ")){{if ("" != null) return num<0;}}
+                else if(j.image.equals(" es igual o mayor que ")){{if ("" != null) return num>=0;}}
+                else if(j.image.equals(" es igual o menor que ")){{if ("" != null) return num<=0;}}
+                else if(j.image.equals(" no es igual a ")){{if ("" != null) return num!=0;}}
                 }
                 else {
 
-                if(j.image.equals("es igual a")){{if ("" != null) return c.equals(d);}}
+                if(j.image.equals(" es igual a ")){{if ("" != null) return c.equals(d);}}
+                else if(j.image.equals(" no es igual a ")){{if ("" != null) return !c.equals(d);}}
 
                 }
 
@@ -621,16 +660,16 @@ if(i.kind==ID&&!mp.get(i.image).toString().contains("\u005c"")){a=(Double)mp.get
     return false;
   }
 
-  private boolean jj_3_3()
- {
-    if (jj_scan_token(137)) return true;
-    if (jj_3R_4()) return true;
-    return false;
-  }
-
   private boolean jj_3_1()
  {
     if (jj_scan_token(RCURLYBRACE)) return true;
+    return false;
+  }
+
+  private boolean jj_3_3()
+ {
+    if (jj_scan_token(136)) return true;
+    if (jj_3R_4()) return true;
     return false;
   }
 
@@ -645,7 +684,7 @@ if(i.kind==ID&&!mp.get(i.image).toString().contains("\u005c"")){a=(Double)mp.get
   private Token jj_scanpos, jj_lastpos;
   private int jj_la;
   private int jj_gen;
-  final private int[] jj_la1 = new int[16];
+  final private int[] jj_la1 = new int[17];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static private int[] jj_la1_2;
@@ -659,19 +698,19 @@ if(i.kind==ID&&!mp.get(i.image).toString().contains("\u005c"")){a=(Double)mp.get
       jj_la1_init_4();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x0,0x0,0x0,0x0,0x0,0x200,0x0,0x200,0x200,0x0,0x0,0x0,0x80,0x0,0x0,0x0,};
+      jj_la1_0 = new int[] {0x0,0x0,0x0,0x0,0x0,0x200,0x0,0x200,0x200,0x0,0x0,0x0,0x0,0x80,0x0,0x0,0x0,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_1 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
    private static void jj_la1_init_2() {
-      jj_la1_2 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_2 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
    private static void jj_la1_init_3() {
-      jj_la1_3 = new int[] {0x89010000,0x800000,0xd0000,0x90000,0x90000,0x0,0x0,0x0,0x0,0x0,0xd0000,0x90000,0x0,0x89010000,0xd0000,0xd0000,};
+      jj_la1_3 = new int[] {0x89010000,0x800000,0xd0000,0x90000,0x90000,0x0,0x0,0x0,0x0,0x0,0xd0000,0xd0000,0x90000,0x0,0x89010000,0xd0000,0xd0000,};
    }
    private static void jj_la1_init_4() {
-      jj_la1_4 = new int[] {0x38,0x0,0x0,0x0,0x0,0x0,0x2,0x0,0x0,0x4,0x100,0x100,0x0,0x38,0x0,0x0,};
+      jj_la1_4 = new int[] {0x38,0x0,0x0,0x0,0x0,0x0,0x2,0x0,0x0,0x4,0x0,0x80,0x80,0x0,0x38,0x0,0x0,};
    }
   final private JJCalls[] jj_2_rtns = new JJCalls[3];
   private boolean jj_rescan = false;
@@ -688,7 +727,7 @@ if(i.kind==ID&&!mp.get(i.image).toString().contains("\u005c"")){a=(Double)mp.get
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 16; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 17; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -703,7 +742,7 @@ if(i.kind==ID&&!mp.get(i.image).toString().contains("\u005c"")){a=(Double)mp.get
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 16; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 17; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -714,7 +753,7 @@ if(i.kind==ID&&!mp.get(i.image).toString().contains("\u005c"")){a=(Double)mp.get
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 16; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 17; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -725,7 +764,7 @@ if(i.kind==ID&&!mp.get(i.image).toString().contains("\u005c"")){a=(Double)mp.get
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 16; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 17; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -735,7 +774,7 @@ if(i.kind==ID&&!mp.get(i.image).toString().contains("\u005c"")){a=(Double)mp.get
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 16; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 17; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -745,7 +784,7 @@ if(i.kind==ID&&!mp.get(i.image).toString().contains("\u005c"")){a=(Double)mp.get
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 16; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 17; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -858,12 +897,12 @@ if(i.kind==ID&&!mp.get(i.image).toString().contains("\u005c"")){a=(Double)mp.get
   /** Generate ParseException. */
   public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[138];
+    boolean[] la1tokens = new boolean[137];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 16; i++) {
+    for (int i = 0; i < 17; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
@@ -884,7 +923,7 @@ if(i.kind==ID&&!mp.get(i.image).toString().contains("\u005c"")){a=(Double)mp.get
         }
       }
     }
-    for (int i = 0; i < 138; i++) {
+    for (int i = 0; i < 137; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

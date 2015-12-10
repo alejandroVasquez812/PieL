@@ -1,0 +1,11 @@
+Crea un estrin llamado hola con valor "Hola, Todos".
+Crea un arreglo de numero llamado arreglos con valores [10,20,30].
+Crea un numero llamado X con valor -100.
+Crea un numero llamado Y con valor -200.
+Imprime hola.
+Imprime X.
+Imprime Y.
+X es igual a X mas Y.
+Imprime X.
+Imprime arreglo arreglos.
+Termina.

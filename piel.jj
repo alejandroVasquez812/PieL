@@ -1,0 +1,528 @@
+options
+{
+	IGNORE_CASE = true;
+	STATIC = false;
+}
+
+PARSER_BEGIN(PieL)
+
+import java.util.*;
+import java.io.*;
+
+public class PieL
+{
+	
+
+    
+    public static void main(String args[]) throws ParseException {
+    try{
+	
+	PieL parser;
+	
+	
+	HashMap mp = new HashMap();	
+	
+	boolean func = true;
+	if(args.length == 0){
+       
+        parser = new PieL(System.in);
+		
+            while(func){
+               func= parser.Input(mp);
+            }
+      }
+      else {
+       
+       
+          parser = new PieL(new java.io.FileInputStream(args[0]));
+        
+            while(func){
+               func= parser.Input(mp);
+            }
+	  }
+	 
+      
+       
+       
+  }
+       catch (Throwable e)
+       {
+           System.out.println(e.getMessage());
+       }
+}
+}
+
+
+
+PARSER_END(PieL)
+
+// Whitespace and comments
+
+SKIP: {
+    " " | "\t" | "\n" | "\r" | <"--" (~["\n","\r"])* ("\n"|"\r")>
+}
+
+
+TOKEN :
+{
+	<OP: " es igual a "|" es menor que "|" es mayor que "|" es igual o menor que "|" es igual o mayor que "|" no es igual a ">
+|	<ARITH: " por "|" entre "|" mas "|" menos "|" modulo ">
+|  < LCURLYBRACE: "{" >
+| < RCURLYBRACE: "}" >
+| < LSQUAREBRACKET: "[" >
+| < RSQUAREBRACKET: "]" >
+| < LPARENTHESIS: "(" >
+| < RPARENTHESIS: ")" >
+| < SCOPE: "::" >
+| < COLON: ":" >
+| < SEMICOLON: ";" >
+| < COMMA: "," >
+| < QUESTIONMARK: "?" >
+| < ELLIPSIS: "..." >
+| < ASSIGNEQUAL: "=" >
+| < TIMESEQUAL: "*=" >
+| < DIVIDEEQUAL: "/=" >
+| < MODEQUAL: "%=" >
+| < PLUSEQUAL: "+=" >
+| < MINUSEQUAL: "-=" >
+| < SHIFTLEFTEQUAL: "<<=" >
+| < SHIFTRIGHTEQUAL: ">>=" >
+| < BITWISEANDEQUAL: "&=" >
+| < BITWISEXOREQUAL: "^=" >
+| < BITWISEOREQUAL: "|=" >
+| < OR: "||" >
+| < AND: "&&" >
+| < BITWISEOR: "|" >
+| < BITWISEXOR: "^" >
+| < AMPERSAND: "&" >
+| < EQUAL: "==" >
+| < NOTEQUAL: "!=" >
+| < LESSTHAN: "<" >
+| < GREATERTHAN: ">" >
+| < LESSTHANOREQUALTO: "<=" >
+| < GREATERTHANOREQUALTO: ">=" >
+| < SHIFTLEFT: "<<" >
+| < SHIFTRIGHT: ">>" >
+| < PLUS: "+" >
+| < MINUS: "-" >
+| < STAR: "*" >
+| < DIVIDE: "/" >
+| < MOD: "%" >
+| < PLUSPLUS: "++" >
+| < MINUSMINUS: "--" >
+| < TILDE: "~" >
+| < NOT: "!" >
+| < DOT: "." >
+| < POINTERTO: "->" >
+| < DOTSTAR: ".*" >
+| < ARROWSTAR: "->*" >
+| < AUTO: "auto" >
+| < BREAK: "break" >
+| < CASE: "case" >
+| < CATCH: "catch" >
+| < CHAR: "char" >
+| < CONST: "const" >
+| < CONTINUE: "continue" >
+| < _DEFAULT: "default" >
+| < DELETE: "delete" >
+| < DO: "do" >
+| < DOUBLE: "double" >
+| < ELSE: "else" >
+| < ENUM: "enum" >
+| < EXTERN: "extern" >
+| < FLOAT: "float" >
+| < FOR: "for" >
+| < FRIEND: "friend" >
+| < GOTO: "goto" >
+| < IF: "if" >
+| < INLINE: "inline" >
+| < INT: "int" >
+| < LONG: "long" >
+| < NEW: "new" >
+| < PRIVATE: "private" >
+| < PROTECTED: "protected" >
+| < PUBLIC: "public" >
+| < REDECLARED: "redeclared" >
+| < REGISTER: "register" >
+| < RETURN: "return" >
+| < SHORT: "short" >
+| < SIZEOF: "sizeof" >
+| < STATIC: "static" >
+| < CLASS : "class" >
+| < SWITCH: "switch" >
+| < TEMPLATE: "template" >
+| < THIS: "this" >
+| < TRY: "try" >
+| < TYPEDEF: "typedef" >
+| < UNION: "union" >
+| < UNSIGNED: "unsigned" >
+| < VIRTUAL: "virtual" >
+| < VOID: "void" >
+| < VOLATILE: "volatile" >
+| < WHILE: "while" >
+| < OPERATOR: "operator" >
+| < TRUETOK: "true" >
+| < FALSETOK: "false" >
+| < THROW: "throw" >
+}
+
+
+TOKEN:
+{
+    
+	<TYPE: <TYPENUMBER>|<TYPESTRING>>
+|	<#TYPENUMBER: "numero">
+|	<#TYPESTRING: "estrin">
+|   <STRUCT: <TYPEARRAY>|<TYPELIST>>
+|	<#TYPEARRAY: "arreglo">
+|	<#TYPELIST: "lista">
+|	<#TYPEFUNCTION: "funcion">
+|	<ID: <LETTER>(<LETTER>|<DIGIT>)*>
+|	<LETTER: ["a"-"z"]|["A"-"Z"]>
+|	<STRING:
+      "\""
+      (   (~["\"","\\","\n","\r"])
+        | ("\\"
+            ( ["n","t","b","r","f","\\","'","\""]
+            | ["0"-"7"] ( ["0"-"7"] )?
+            | ["0"-"3"] ["0"-"7"] ["0"-"7"]
+            )
+          )
+      )*
+      "\""
+  >
+
+	
+}
+
+//Numbers
+TOKEN:
+{
+    <NUMBER: <SIGNED> ( "." (<DIGIT>)+ )? >
+|   <DIGIT: ["0"-"9"] >
+| 	<SIGNED: ("-")? (<DIGIT>)+>
+
+|	<MULTITERM:((<NUMBER>|<STRING>)(",")?)*>
+}
+
+
+boolean Input(HashMap mp):
+{}
+{
+	"Termina." {return false;}
+  |(Statement(mp) ".")* {return true;}
+  |<EOF> {return false;}
+}
+
+void Statement(HashMap mp):
+{Token j=null,k=null,l=null,m=null,t=null, n=null,o=null;
+StringBuilder sb = new StringBuilder();
+	Boolean check=null,persist=false;
+}
+{ LOOKAHEAD(2)
+    "Crea un " j=<TYPE> " llamado "k=<ID> " con valor " (l=<STRING> |l=<NUMBER> |l=<ID>) 
+    {
+    	if(j.image.equals("numero")){mp.put(k.image,Double.parseDouble(l.image));}
+        else if(j.image.equals("estrin")){mp.put(k.image,l.image);}
+       
+    }
+	
+| "Mientras "(j=<ID>|j=<NUMBER>)l=<OP>(m=<NUMBER>|m=<ID>) " repite {"
+{
+token = getNextToken();
+while (!token.image.equals("}"))
+              {
+               
+				sb.append(token.image);
+				 token = getNextToken();
+              }
+
+
+} ("}")?
+{
+	
+	try{
+		
+		boolean verify=false;
+		Double a,b;		
+		if(j.kind == ID){
+			a=(Double)mp.get(j.image);
+			}
+		else{a = Double.parseDouble(j.image);}
+				
+		if(m.kind == ID){
+			b=(Double)mp.get(m.image);
+			}
+		else{b = Double.parseDouble(m.image);}
+		
+		int nums = Double.compare(a,b);
+		
+		if(l.image.equals(" es igual a ")){verify= nums==0;}
+		else if(l.image.equals(" es mayor que ")){verify= nums>0;}
+		else if(l.image.equals(" es menor que ")){verify= nums<0;}
+		else if(l.image.equals(" es igual o mayor que ")){verify= nums>=0;}
+		else if(l.image.equals(" es igual o menor que ")){verify=nums<=0;}
+		else if(l.image.equals(" no es igual a ")){verify=nums!=0;}
+		//System.out.println("Here and"+verify);
+		while(verify)
+		{
+		PrintWriter writer = new PrintWriter("printReader.txt", "UTF-8");
+		writer.println(sb.toString());
+		writer.println("Termina.");
+		writer.close();
+		PieL parse2 = new PieL(new FileInputStream("printReader.txt"));
+		boolean func2 = true;
+            while(func2){
+               func2= parse2.Input(mp);
+            }
+			//System.out.println("Here and"+mp.get("X"));
+			if(j.kind == ID){
+			a=(Double)mp.get(j.image);
+			}
+		else{a = Double.parseDouble(j.image);}
+				
+		if(m.kind == ID){
+			b=(Double)mp.get(m.image);
+			}
+		else{b = Double.parseDouble(m.image);}
+		
+		 nums = Double.compare(a,b);
+		
+		if(l.image.equals(" es igual a ")){verify= nums==0;}
+		else if(l.image.equals(" es mayor que ")){verify= nums>0;}
+		else if(l.image.equals(" es menor que ")){verify= nums<0;}
+		else if(l.image.equals(" es igual o mayor que ")){verify= nums>=0;}
+		else if(l.image.equals(" es igual o menor que ")){verify=nums<=0;}
+		else if(l.image.equals(" no es igual a ")){verify=nums!=0;}
+			
+		}
+	}
+	catch(Exception E){}
+}
+|	"Crea un " k=<STRUCT>" de " t=<TYPE> " llamado "l=<ID>" con valores [" j=<MULTITERM> "]"
+    {
+        String[] lister = j.image.split(",");
+        if(t.image.equals("numero")){
+        	ArrayList<Double> list = new ArrayList<Double>(); 
+        for(String x:lister)
+        {
+        	list.add(Double.parseDouble(x));
+        }
+        
+         mp.put(l.image,list);
+        }
+        else
+        {
+        ArrayList<String> list = new ArrayList<String>();
+        	for(String x:lister)
+        {
+        	list.add(x);
+        }
+         mp.put(l.image,list);
+        }
+        
+       
+    }    
+    
+//|	"Crea una funcion de " k=<TYPE>" llamada " t=<ID>" con argumentos "m=<MULTIARGUMENT> " que haga {" Input(mp) "}"
+
+|   "Si " check=Conds(mp) " es cierto {"
+	{
+		if(check){Input(mp); persist=true;}
+		else{
+			while (!token.image.equals("}"))
+              {
+                token = getNextToken();
+              }
+			  
+			  
+			  
+		}
+		
+}(LOOKAHEAD(2) "}")? (" de lo contrario si" {if(!persist){check=Conds(mp);}else{check=false;}} " es cierto {"
+	{
+		if(check){Input(mp);persist=true;}
+		else{
+			while (!token.image.equals("}"))
+              {
+                token = getNextToken();
+              }
+			  
+			  
+			  
+		}
+
+
+})*("}")? ("si no es cierto {" {
+	if(!persist)
+	{Input(mp);}
+	else{
+			while (!token.image.equals("}"))
+              {
+                token = getNextToken();
+              }
+			  
+			  
+			  
+		}
+
+} ("}")?)?{} 
+ 
+| 	"Imprime "(m=<ID>|m=<NUMBER>|m=<STRING>)
+{
+if(m.kind==ID)
+{
+System.out.println(mp.get(m.image));
+}
+else{
+System.out.println(m.image);
+}
+}
+| 	"Imprime arreglo "m=<ID>{System.out.println(Arrays.asList(mp.get(m.image)));}
+|   "Imprime el elemento "m=<NUMBER>" del arreglo "k=<ID>{
+	ArrayList<Object> list = (ArrayList<Object>)(mp.get(k.image));
+	
+	System.out.println(list.get(Integer.parseInt(m.image)-1));
+	
+	
+	}
+|	j=<ID> <OP> (k=<ID>|k=<NUMBER>|k=<STRING>|"el elemento "k=<NUMBER>" del arreglo " t=<ID>) (l=<ARITH> (m=<ID>|m=<NUMBER>|"el elemento "n=<NUMBER>" del arreglo " o=<ID>))?
+	{
+		
+		if(l==null&&t==null)
+		{
+			if(k.kind == ID){mp.put(j.image,mp.get(k.image));}
+			else if (k.kind == NUMBER){mp.put(j.image,Double.parseDouble(k.image));}
+			else if(k.kind == STRING) {mp.put(j.image,k.image);}
+			
+		
+		}
+		else if(l==null&t!=null)
+		{
+			ArrayList<Object> list = (ArrayList<Object>)(mp.get(t.image));
+			
+			mp.put(j.image,list.get(Integer.parseInt(k.image)-1));
+		}
+		else if(o==null&&t==null)
+		{
+			//System.out.println("Here and"+mp.get("X"));
+			Double a=null,b=null;
+			if(k.kind ==ID){a= (Double)mp.get(k.image);}
+			else if(k.kind ==NUMBER){a=Double.parseDouble(k.image);}
+			if(m.kind ==ID){b= (Double)mp.get(m.image);}
+			else if(m.kind ==NUMBER){b=Double.parseDouble(m.image);}
+			//System.out.println(a+" and "+b);
+			if(l.image.contains("por")){mp.put(j.image,a*b);}
+			else if (l.image.contains("entre")){mp.put(j.image,a/b);}
+			else if (l.image.contains("mas")){mp.put(j.image,a+b);}
+			else if (l.image.contains("menos")){mp.put(j.image,a-b);}
+			else if (l.image.contains("modulo")){mp.put(j.image,a%b);}
+			
+		
+		}
+		else if(t!=null&&o==null)
+		{
+			ArrayList<Object> list = (ArrayList<Object>)(mp.get(t.image));
+			Double a=(Double)list.get(Integer.parseInt(k.image)-1),b=null;
+			
+			if(m.kind ==ID){b= (Double)mp.get(m.image);}
+			else if(m.kind ==NUMBER){b=Double.parseDouble(m.image);}
+			
+			if(l.image.equals("por")){mp.put(j.image,a*b);}
+			else if (l.image.equals("entre")){mp.put(j.image,a/b);}
+			else if (l.image.equals("mas")){mp.put(j.image,a+b);}
+			else if (l.image.equals("menos")){mp.put(j.image,a-b);}
+			else if (l.image.equals("modulo")){mp.put(j.image,a%b);}
+			
+		}
+		else if (o!=null&&t==null){
+			ArrayList<Object> list = (ArrayList<Object>)(mp.get(o.image));
+			Double b=(Double)list.get(Integer.parseInt(n.image)-1),a=null;
+			
+			if(k.kind ==ID){a= (Double)mp.get(k.image);}
+			else if(k.kind ==NUMBER){a=Double.parseDouble(k.image);}
+			
+			if(l.image.equals("por")){mp.put(j.image,a*b);}
+			else if (l.image.equals("entre")){mp.put(j.image,a/b);}
+			else if (l.image.equals("mas")){mp.put(j.image,a+b);}
+			else if (l.image.equals("menos")){mp.put(j.image,a-b);}
+			else if (l.image.equals("modulo")){mp.put(j.image,a%b);}
+		}
+		
+		else{
+			ArrayList<Object> listt = (ArrayList<Object>)(mp.get(t.image));
+			ArrayList<Object> listo = (ArrayList<Object>)(mp.get(o.image));
+			Double a=(Double)listt.get(Integer.parseInt(k.image)-1),b=(Double)listo.get(Integer.parseInt(n.image)-1);
+			
+			
+			
+			if(l.image.equals("por")){mp.put(j.image,a*b);}
+			else if (l.image.equals("entre")){mp.put(j.image,a/b);}
+			else if (l.image.equals("mas")){mp.put(j.image,a+b);}
+			else if (l.image.equals("menos")){mp.put(j.image,a-b);}
+			else if (l.image.equals("modulo")){mp.put(j.image,a%b);}
+		}
+	
+	}
+    
+}
+
+
+
+
+
+boolean Conds(HashMap mp):
+{Token i,j,k;
+Double a=null,b=null;
+String c=null,d=null;
+Boolean check=null;}
+{
+	(i=<STRING> |i=<NUMBER> |i=<ID>) j=<OP>(k=<STRING> |k=<NUMBER> |k=<ID>) ( LOOKAHEAD(3)" y tambien" check=Conds(mp))*
+	{
+		
+		
+		if(i.kind==ID&&!mp.get(i.image).toString().contains("\"")){a=(Double)mp.get(i.image);}
+		else if(i.kind==ID){c=mp.get(i.image).toString();}
+		else if(i.kind==NUMBER){a=Double.parseDouble(i.image);}
+		else{c=i.image;}
+		if(k.kind==ID&&!mp.get(k.image).toString().contains("\"")){b=(Double)mp.get(k.image);}
+		else if(k.kind==ID){d=mp.get(k.image).toString();}
+		else if(k.kind==NUMBER){b=Double.parseDouble(k.image);}
+		else{d=k.image;}
+		
+		if(a!=null&&b!=null&&check!=null){
+			int num = Double.compare(a,b);
+		
+		if(j.image.equals(" es igual a ")){return num==0&&check;}
+		else if(j.image.equals(" es mayor que ")){return num>0&&check;}
+		else if(j.image.equals(" es menor que ")){return num<0&&check;}
+		else if(j.image.equals(" es igual o mayor que ")){return num>=0&&check;}
+		else if(j.image.equals(" es igual o menor que ")){return num<=0&&check;}
+		else if(j.image.equals(" no es igual a ")){return num!=0&&check;}
+		}
+		else if(check!=null){
+		
+		if(j.image.equals(" es igual a ")){return c.equals(d)&&check;}
+		else if(j.image.equals(" no es igual a ")){return !c.equals(d)&&check;}
+		}
+		else if(a!=null&&b!=null){
+			int num = Double.compare(a,b);
+		
+		if(j.image.equals(" es igual a ")){return num==0;}
+		else if(j.image.equals(" es mayor que ")){return num>0;}
+		else if(j.image.equals(" es menor que ")){return num<0;}
+		else if(j.image.equals(" es igual o mayor que ")){return num>=0;}
+		else if(j.image.equals(" es igual o menor que ")){return num<=0;}
+		else if(j.image.equals(" no es igual a ")){return num!=0;}
+		}
+		else {
+		
+		if(j.image.equals(" es igual a ")){return c.equals(d);}
+		else if(j.image.equals(" no es igual a ")){return !c.equals(d);}
+		
+		}
+
+		return false;
+	}
+}
+
